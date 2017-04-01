@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""
+Excavate -- dig to understand disk usage over time
+
+List all files in a file hierarchy and sort according to when they were last 
+changed.  Files are shown from newest to oldest. Also shown is the file size and 
+the accumulated disk space used to hold the file and all younger files.
+
+usage: excavate [options] [<path>...]
+
+options:
+    -d, --date  give modification date rather than description of age
+    -s, --size  sort by size rather than by age
+    -w, --warn  warn of missing files
+
+Files in the top three deciles are colored red, pink, and yellow respectively.
+"""
+
+import os
+from docopt import docopt
+from inform import display, os_error, warn, Color
+import arrow
+from quantiphy import Quantity
+Quantity.set_preferences(prec=2)
+
+cmdline = docopt(__doc__)
+
+files = []
+
+try:
+    for path in cmdline['<path>'] if cmdline['<path>'] else '.':
+        for dirpath, dirnames, filenames in os.walk(path):
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                try:
+                    fileinfo = os.stat(filepath)
+                    files.append((filepath, fileinfo.st_mtime, fileinfo.st_size))
+                except OSError as err:
+                    if cmdline['--warn']:
+                        warn(os_error(err))
+
+
+    files_by_age = sorted(files, key=lambda f: f[1], reverse=True)
+    files_by_size = sorted(files, key=lambda f: f[2], reverse=True)
+    bucket = len(files_by_size)//10
+    red_files = [f[0] for f in files_by_size[:bucket]]
+    pink_files = [f[0] for f in files_by_size[bucket:2*bucket]]
+    yellow_files = [f[0] for f in files_by_size[2*bucket:3*bucket]]
+    red = Color('red')
+    pink = Color('magenta')
+    yellow = Color('yellow')
+
+    accumulated = 0
+    display()
+    display('MODIFIED             SIZE     ACCUM    FILE')
+    if cmdline['--size']:
+        files = files_by_size
+    else:
+        files = files_by_age
+    for filepath, mtime, size in files:
+        accumulated += size
+        mtime = arrow.get(mtime)
+        if cmdline['--date']:
+            mtime = mtime.format('YYYY-MM-DD HH:mm:ss')
+        else:
+            mtime = mtime.humanize()
+        size = Quantity(size, 'B')
+        accumulated = Quantity(accumulated, 'B')
+        if filepath in red_files:
+            name = red(filepath)
+        elif filepath in pink_files:
+            name = pink(filepath)
+        elif filepath in yellow_files:
+            name = yellow(filepath)
+        else:
+            name = filepath
+        display('{:20s} {:8s} {:8s} {}'.format(mtime, size, accumulated, name))
+except (KeyboardInterrupt, BrokenPipeError):
+    #display('killed by user')
+    pass
