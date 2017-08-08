@@ -6,6 +6,9 @@ List all files in a file hierarchy and sort according to when they were last
 changed.  Files are shown from newest to oldest. Also shown is the file size and 
 the accumulated disk space used to hold the file and all younger files.
 
+Excavate can help you find the reason why a file hierarchy has suddenly and 
+dramatically increased in size.
+
 usage: excavate [options] [<path>...]
 
 options:
@@ -13,11 +16,8 @@ options:
     -s, --size  sort by size rather than by age
     -w, --warn  warn of missing files
 
-Files in the top three deciles in terms of file size are colored red, pink, and 
-yellow respectively.
-
-Excavate can help you find the reason why a file hierarchy has suddenly and 
-dramatically increased in size.
+Files in the top three deciles in size are colored red, pink, and yellow 
+respectively.
 """
 
 import os

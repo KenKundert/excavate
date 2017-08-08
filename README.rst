@@ -1,7 +1,11 @@
 Excavate -- Dig to understand disk usage over time
 ==================================================
 
-Use 'pip3 install excavate' to install.
+Use::
+
+    pip3 install --user excavate
+
+to install. Executable is placed in ~/.local/bin.
 
 
 Synopsis
