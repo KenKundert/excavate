@@ -1,0 +1,9 @@
+README.rst
+excavate
+setup.py
+excavate.egg-info/PKG-INFO
+excavate.egg-info/SOURCES.txt
+excavate.egg-info/dependency_links.txt
+excavate.egg-info/requires.txt
+excavate.egg-info/top_level.txt
+excavate.egg-info/zip-safe

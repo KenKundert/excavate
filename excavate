@@ -13,7 +13,11 @@ options:
     -s, --size  sort by size rather than by age
     -w, --warn  warn of missing files
 
-Files in the top three deciles are colored red, pink, and yellow respectively.
+Files in the top three deciles in terms of file size are colored red, pink, and 
+yellow respectively.
+
+Excavate can help you find the reason why a file hierarchy has suddenly and 
+dramatically increased in size.
 """
 
 import os
@@ -21,7 +25,7 @@ from docopt import docopt
 from inform import display, os_error, warn, Color
 import arrow
 from quantiphy import Quantity
-Quantity.set_preferences(prec=2)
+Quantity.set_prefs(prec=2)
 
 cmdline = docopt(__doc__)
 

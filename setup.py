@@ -6,7 +6,7 @@ with open('README.rst') as f:
 keywords = '''
     disk usage
 '''
-dependencies = 'docopt inform arrow quantiphy'
+dependencies = 'docopt inform>=1.9 arrow quantiphy>=2.0'
 
 setup(
     name='excavate',
@@ -15,6 +15,8 @@ setup(
     long_description=readme,
     author="Ken Kundert",
     author_email='excavate@nurdletech.com',
+    url='https://github.com/kenkundert/excavate',
+    download_url='https://github.com/kenkundert/excavate/tarball/master',
     license='GPLv3+',
     zip_safe=True,
     scripts='excavate'.split(),
