@@ -18,14 +18,14 @@ subdirectories while sorting them according to when they last changed, from
 youngest to oldest.  When listing the files it also gives their size and the 
 accumulated disk space need to hold the file and all younger files.
 Files in the top three deciles in size are colored red, pink, and yellow 
-respectively.
+respectively::
 
-  | Usage: excavate [options] [<path>...]
-  |
-  | Options:
-  |     -d, --date  give modification date rather than description of age
-  |     -s, --size  sort by size rather than by age
-  |     -w, --warn  warn of inaccessible files
+    Usage: excavate [options] [<path>...]
+
+    Options:
+        -d, --date  give modification date rather than description of age
+        -s, --size  sort by size rather than by age
+        -w, --warn  warn of inaccessible files
 
 
 Normally the output would be piped into more (or less). For example::
