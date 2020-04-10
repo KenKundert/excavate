@@ -1,6 +1,10 @@
 Excavate -- Dig to understand disk usage over time
 ==================================================
 
+| Version: 1.0.0
+| Released: 2017-08-07
+|
+
 Use::
 
     pip3 install --user excavate
@@ -13,12 +17,15 @@ Synopsis
 
 *Excavate* is a very simple command line utility used to understand how disk 
 usage in a particular part of the file system has changed over time. It lists 
-out the all of the files contained in a particular directory and its 
-subdirectories while sorting them according to when they last changed, from 
-youngest to oldest.  When listing the files it also gives their size and the 
-accumulated disk space need to hold the file and all younger files.
-Files in the top three deciles in size are colored red, pink, and yellow 
-respectively::
+out the files contained in a particular directory and its subdirectories while 
+sorting them according to when they last changed, from youngest to oldest.  When 
+listing the files it also gives their size and the accumulated disk space need 
+to hold the file and all younger files.  Files in the top three deciles in size 
+are colored red, pink, and yellow respectively.
+
+If a directory has mysteriously dramatically increased in size recently, you can
+understand what has changed by running *excavate* on that directory and look for
+red entries near the top of the list.
 
     Usage: excavate [options] [<path>...]
 
