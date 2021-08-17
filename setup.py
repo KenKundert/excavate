@@ -18,10 +18,10 @@ setup(
     url = 'https://github.com/kenkundert/excavate',
     download_url = 'https://github.com/kenkundert/excavate/tarball/master',
     license = 'GPLv3+',
-    zip_safe = False,
     scripts = 'excavate'.split(),
     install_requires = dependencies.split(),
     keywords = keywords.split(),
+    zip_safe = True,
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
