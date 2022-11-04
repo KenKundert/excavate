@@ -1,5 +1,5 @@
-Excavate -- Dig to understand disk usage over time
-==================================================
+Excavate — Dig to understand disk usage over time
+=================================================
 
 | Version: 1.0.0
 | Released: 2017-08-07
